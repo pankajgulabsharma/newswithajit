@@ -17,7 +17,6 @@
     "express-form-data": "^2.0.16",
     "image-to-base64": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
-    "loadsh": "0.0.4",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "mongoose": "^5.11.19",

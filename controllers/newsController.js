@@ -14,8 +14,7 @@ const addNews = asyncHandler(async (req, res) => {
   // console.log("req.body", req.body);
   // console.log("req.files.images", req.files.image);
   let urlImage = "";
-  if (imageUrl == "")
-    urlImage = await imageToBase64(req.files.image.path);
+  if (imageUrl == "") urlImage = await imageToBase64(req.files.image.path);
 
   console.log("urlImage", urlImage);
 
@@ -25,7 +24,10 @@ const addNews = asyncHandler(async (req, res) => {
     content,
     category,
     url,
-    urlToImage: imageUrl !== "" ? imageUrl : `data:${req.files.image.type};base64,` + urlImage,
+    urlToImage:
+      imageUrl !== ""
+        ? imageUrl
+        : `data:${req.files.image.type};base64,` + urlImage,
     addedAt: Date.now(),
   });
 
@@ -280,12 +282,15 @@ const removeComment = asyncHandler(async (req, res) => {
 });
 
 const getTodayNews = asyncHandler(async (req, res) => {
-
   let result = await News.find({
-    updatedAt: { $lt: new Date(), 
-        $gte: new Date(new Date().setDate(new Date().getDate()-1)) },
-  }).sort("-addedAt")
-  .populate({ path: 'category', select: ['_id', 'category_name'] }).populate({ path: 'addedBy', select: ['name', 'email']})
+    updatedAt: {
+      $lt: new Date(),
+      $gte: new Date(new Date().setDate(new Date().getDate() - 1)),
+    },
+  })
+    .sort("-addedAt")
+    .populate({ path: "category", select: ["_id", "category_name"] })
+    .populate({ path: "addedBy", select: ["name", "email"] });
   res.json({
     success: true,
     count: result.length,

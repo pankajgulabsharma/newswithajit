@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 const {
   authUser,
   registerUser,
@@ -13,28 +13,28 @@ const {
   getFavorites,
   removeFavorite,
   resetPassword,
-  checkFavExistsOrNot
-} = require('../controllers/userController');
+  checkFavExistsOrNot,
+} = require("../controllers/userController");
 
-const protect = require('../middleware/authMiddleware.js')
+const protect = require("../middleware/authMiddleware.js");
 
-router.route('/').post(registerUser).get(protect, getUsers)
-router.route('/login').post(authUser)
+router.route("/").post(registerUser).get(protect, getUsers);
+router.route("/login").post(authUser);
 router
-  .route('/profile')
+  .route("/profile")
   .get(protect, getUserProfile)
-  .put(protect, updateUserProfile)
+  .put(protect, updateUserProfile);
 router
-  .route('/:id')
-//   .delete(protect, deleteUser)
-  .get(getUserById)
+  .route("/:id")
+  //   .delete(protect, deleteUser)
+  .get(getUserById);
 //   .put(protect, updateUser)
 
-router.route('/profile/password/reset').post(protect ,resetPassword);
+router.route("/profile/password/reset").post(protect, resetPassword);
 
-router.route('/addToFav/:newsId').put(protect, addToFav)
-router.route('/getFavOfUser/all').get(protect, getFavorites)
+router.route("/addToFav/:newsId").put(protect, addToFav);
+router.route("/getFavOfUser/all").get(protect, getFavorites);
 
-router.route('/checkExists/fav/:newsId').get(protect, checkFavExistsOrNot)
+router.route("/checkExists/fav/:newsId").get(protect, checkFavExistsOrNot);
 
-module.exports = router
+module.exports = router;
